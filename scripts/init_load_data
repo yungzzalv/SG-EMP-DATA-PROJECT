@@ -1,0 +1,30 @@
+=== SG 7E ACTIVE LISTING ===
+--full load = 1. Truncate the table 2.Load the data into the database table -- performing this is like refreshing the data in the table
+	--bulk insert to load data from csv into database table > specify file path > specification of handling data (first row = which is the first row;fieldterminator=delimiter;
+	-- tablock = lock table to process table as a whole instead of go through row by row to improve performance)
+truncate table bronze.SG7E_ACTIVE ;
+
+Bulk insert bronze.SG7E_ACTIVE
+from 'C:\Users\pchai\OneDrive - The Dairy Farm Company Ltd\Documents\SG Market\Datawarehouse Project\SG7E June Active List.csv'
+with (
+	format = 'csv',
+	fieldquote = '"' , 
+	firstrow  = 2,
+	fieldterminator = ',',
+	tablock
+)
+=== Franchise List ===
+--full load = 1. Truncate the table 2.Load the data into the database table -- performing this is like refreshing the data in the table
+	--bulk insert to load data from csv into database table > specify file path > specification of handling data (first row = which is the first row;fieldterminator=delimiter;
+	-- tablock = lock table to process table as a whole instead of go through row by row to improve performance)
+truncate table bronze.fran_list2026;
+
+Bulk insert bronze.fran_list2026
+from 'C:\Users\pchai\OneDrive - The Dairy Farm Company Ltd\Documents\SG Market\Datawarehouse Project\7E Franchise List(June2026).csv'
+with (
+	format = 'csv',
+	fieldquote = '"' , 
+	firstrow  = 2,
+	fieldterminator = ',',
+	tablock
+)
