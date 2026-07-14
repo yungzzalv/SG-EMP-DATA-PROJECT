@@ -1,0 +1,57 @@
+	-- create Store Procedure --
+	--full load = 1. Truncate the table 2.Load the data into the database table -- performing this is like refreshing the data in the table
+	--bulk insert to load data from csv into database table > specify file path > specification of handling data (first row = which is the first row;fieldterminator=delimiter;
+	-- tablock = lock table to process table as a whole instead of go through row by row to improve performance)
+create or alter procedure bronze.load_bronze as
+begin
+		Print '====================================================';
+		print 'loading bronze layer';
+		Print '====================================================';
+
+		Print '----------------------------------------------------';
+		Print 'Loading SG7E ACTIVE LIST';
+		Print '----------------------------------------------------';
+		Print '>> Truncating Table:bronze.SG7E_ACTIVE' ;
+		truncate table bronze.SG7E_ACTIVE ;
+		Print '>> Inserting data into: Table:bronze.SG7E_ACTIVE' ;
+		Bulk insert bronze.SG7E_ACTIVE
+		from 'C:\Users\pchai\OneDrive - The Dairy Farm Company Ltd\Documents\SG Market\Datawarehouse Project\SG7E June Active List.csv'
+		with (
+			format = 'csv',
+			fieldquote = '"' , 
+			firstrow  = 2,
+			fieldterminator = ',',
+			tablock
+		)
+
+	Print '----------------------------------------------------';
+	Print 'Loading GUARDIAN AM LIST';
+	Print '----------------------------------------------------';
+	Print '>> Truncating Table:bronze.guardian_AMlist'
+	truncate table bronze.guardian_AMlist;
+	Print '>> Inserting data into: Table:bronze.guardian_AMlist' ;
+	Bulk insert bronze.guardian_AMlist
+	from 'C:\Users\pchai\OneDrive - The Dairy Farm Company Ltd\Documents\SG Market\Datawarehouse Project\Guardian AM Store Assignment.csv'
+	with (
+		format = 'csv',
+		fieldquote = '"' , 
+		firstrow  = 2,
+		fieldterminator = ',',
+		tablock
+		);
+	Print '----------------------------------------------------';
+	Print 'Loading SG 7E FRANCHISE LIST';
+	Print '----------------------------------------------------';
+	Print '>> Truncating Table:bronze.fran_list2026' ;
+	truncate table bronze.fran_list2026;
+	Print '>> Inserting data into: Table:bronze.fran_list2026' ;
+	Bulk insert bronze.fran_list2026
+	from 'C:\Users\pchai\OneDrive - The Dairy Farm Company Ltd\Documents\SG Market\Datawarehouse Project\7E Franchise List(June2026).csv'
+	with (
+		format = 'csv',
+		fieldquote = '"' , 
+		firstrow  = 2,
+		fieldterminator = ',',
+		tablock
+	)
+end ;
