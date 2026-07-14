@@ -28,3 +28,21 @@ with (
 	fieldterminator = ',',
 	tablock
 )
+
+===GUARDIAN AM LIST ===
+	--full load = 1. Truncate the table 2.Load the data into the database table -- performing this is like refreshing the data in the table
+	--bulk insert to load data from csv into database table > specify file path > specification of handling data (first row = which is the first row;fieldterminator=delimiter;
+	-- tablock = lock table to process table as a whole instead of go through row by row to improve performance)
+truncate table bronze.guardian_AMlist;
+
+Bulk insert bronze.guardian_AMlist
+from 'C:\Users\pchai\OneDrive - The Dairy Farm Company Ltd\Documents\SG Market\Datawarehouse Project\Guardian AM Store Assignment.csv'
+with (
+	format = 'csv',
+	fieldquote = '"' , 
+	firstrow  = 2,
+	fieldterminator = ',',
+	tablock
+	);
+select *
+from bronze.guardian_AMlist;
