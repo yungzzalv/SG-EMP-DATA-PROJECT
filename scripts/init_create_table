@@ -61,3 +61,17 @@ create table bronze.SG7E_ACTIVE (
 	Mobile NVARCHAR(20)
 	);
 
+===GUARDIAN AM LIST===
+-- 1. check table exist > drop table if exist > create new table from scratch
+if object_ID ('bronze.guardian_AMlist' , 'U') is not null
+	drop table bronze.guardian_AMlist;
+
+create table bronze.guardian_AMlist (
+	Number int,
+	AM varchar(10),
+	Site_Code varchar(max),
+	ABB varchar (10),
+	Branch_Name varchar(max),
+	AM_Email varchar(max)
+	);
+
