@@ -20,3 +20,44 @@ create table bronze.fran_list2026 (
 	OIC nvarchar(50),
 	Name_in_NRIC nvarchar(50)
 );
+
+===1. check table exist > drop table if exist > create new table from scratch===
+if object_ID ('bronze.SG7E_ACTIVE' , 'U') is not null
+	drop table bronze.SG7E_ACTIVE;
+
+create table bronze.SG7E_ACTIVE (
+	Emp_ID NVARCHAR(20),
+	SN INT,
+	Company NVARCHAR(50),
+	F_0R_C CHAR(1),
+	NRIC_Name NVARCHAR(MAX),
+	NRIC CHAR(9),
+	ID_Card_Type NVARCHAR(50),
+	Designation NVARCHAR(MAX),
+	Location NVARCHAR(MAX),
+	Store NVARCHAR(10),
+	Area VARCHAR(10),
+	District NVARCHAR(10),
+	Date_Join NVARCHAR(50),
+	Date_Resigned varchar (50),
+	Service_Len DECIMAL(5,2),
+	Group_Service_Len DECIMAL(5,2),
+	Job_Category NVARCHAR(50),
+	Divisional NVARCHAR(50),
+	Contract_Term NVARCHAR(50),
+	Type_of_Hours NVARCHAR(50),
+	Contract_Start_Date varchar(20),
+	Contract_End_Date varchar(20),
+	Gender CHAR(1),
+	Marital NVARCHAR(10),
+	DOB varchar(50),
+	Age DECIMAL (5,2),
+	Race NVARCHAR(50),
+	Nationality NVARCHAR(50),
+	Highest_Education NVARCHAR(MAX),
+	Column1 NVARCHAR(50),
+	Column2 NVARCHAR(50),
+	PERSONAL_Address NVARCHAR(MAX),
+	Mobile NVARCHAR(20)
+	);
+
