@@ -1,0 +1,22 @@
+===============================================
+This scripts create all the tables and defining the columns' name and data type
+===============================================
+
+create table bronze.fran_list2026 (
+	SAP_Store nvarchar(10),
+	SN INT,
+	Store_Number nvarchar(10),
+	Area char(2),
+	Franchise_Name nvarchar(50),
+	RCB_Name nvarchar(50),
+	RCB_No nvarchar(50),
+	GST_No nvarchar(50),
+	Store_Address text,
+	Store_Tel int,
+	Gender char(1),
+	HP int,
+	Official_Email nvarchar(20),
+	Store_Franchise_Date date,
+	OIC nvarchar(50),
+	Name_in_NRIC nvarchar(50)
+);
