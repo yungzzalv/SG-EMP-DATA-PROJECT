@@ -54,4 +54,19 @@ begin
 		fieldterminator = ',',
 		tablock
 	)
+Print '----------------------------------------------------';
+	Print 'Loading SF EMPLOYEE DATA LIST';
+	Print '----------------------------------------------------';
+	Print '>> Truncating Table:bronze.SF_EMP_DATA ;
+	truncate table bronze.SF_EMP_DATA;
+	Print '>> Inserting data into: Table:bronze.SF_EMP_DATA' ;
+	Bulk insert bronze.SF_EMP_DATA
+	from 'C:\Users\pchai\OneDrive - The Dairy Farm Company Ltd\Documents\SG Market\Datawarehouse Project\report_sg_emp_info_test (6).csv'
+	with (
+		format = 'csv',
+		fieldquote = '"' , 
+		firstrow  = 2,
+		fieldterminator = ',',
+		tablock
+	)
 end ;
