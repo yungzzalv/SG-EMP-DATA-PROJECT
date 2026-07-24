@@ -42,6 +42,17 @@ with (
 	fieldquote = '"' , 
 	firstrow  = 2,
 	fieldterminator = ',',
+
+===SF EMP DATA LIST ===
+Bulk insert bronze.SF_EMP_DATA
+from 'C:\Users\pchai\OneDrive - The Dairy Farm Company Ltd\Documents\SG Market\Datawarehouse Project\report_sg_emp_info_test (6).csv'
+with (
+	format = 'csv',
+	fieldquote = '"' , 
+	firstrow  = 2,
+	fieldterminator = ',',
+	tablock
+)
 	tablock
 	);
 select *
