@@ -75,3 +75,39 @@ create table bronze.guardian_AMlist (
 	AM_Email varchar(max)
 	);
 
+===SF EMP DATA LIST===
+if OBJECT_ID ('bronze.SF_EMP_DATA' , 'u') is not null
+drop table bronze.SF_EMP_DATA ;
+
+create table bronze.SF_EMP_DATA(
+	Team_Member_ID_Person_ID VARCHAR(50),
+	User_Employee_ID VARCHAR(50),
+	Legacy_Team_Member_ID VARCHAR(50),
+	Payroll_ID VARCHAR(50),
+	Employee_Status VARCHAR(50),
+	Singapore_Full_Legal_Name VARCHAR(MAX),
+	Position_Title VARCHAR(MAX),
+	Banner VARCHAR(50),
+	Banner_Name VARCHAR(50),
+	Function_NAME VARCHAR(50),
+	Job_Grade INT,
+	Is_Fulltime_Employee VARCHAR(50),
+	Nationality VARCHAR(50),
+	Singapore_citizen VARCHAR(50),
+	SG_Race VARCHAR(50),
+	SG_Religion VARCHAR(50),
+	Personal_Mobile_Phone VARCHAR(50),
+	Business_Email_Address VARCHAR(50),
+	Cost_Center_Code VARCHAR(50),
+	Cost_Center_Name VARCHAR(50),
+	Cost_Center_Budget_Group VARCHAR(50),
+	Office_Store_Code VARCHAR(50),
+	Office_StoreName VARCHAR(50),
+	Business_Area VARCHAR(50),
+	Franchisee_Legal_Entity VARCHAR(50),
+	Manager_User_Sys_ID VARCHAR(50)
+);
+
+
+
+
