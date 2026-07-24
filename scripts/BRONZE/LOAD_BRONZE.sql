@@ -1,1 +1,99 @@
+create or alter procedure bronze.load_bronze as
+begin
+	DECLARE @START_TIME DATETIME, @END_TIME DATETIME, @BATCH_START_TIME DATETIME, @BATCH_END_TIME DATETIME;
+	BEGIN TRY
+	SET @BATCH_START_TIME = GETDATE()
+		Print '====================================================';
+		print 'loading bronze layer';
+		Print '====================================================';
+
+		SET @START_TIME = GETDATE();
+		Print '----------------------------------------------------';
+		Print 'Loading SG7E ACTIVE LIST';
+		Print '----------------------------------------------------';
+		Print '>> Truncating Table:bronze.SG7E_ACTIVE' ;
+		truncate table bronze.SG7E_ACTIVE ;
+		Print '>> Inserting data into: Table:bronze.SG7E_ACTIVE' ;
+		Bulk insert bronze.SG7E_ACTIVE
+		from 'C:\Users\pchai\OneDrive - The Dairy Farm Company Ltd\Documents\SG Market\Datawarehouse Project\SG7E June Active List.csv'
+		with (
+			format = 'csv',
+			fieldquote = '"' , 
+			firstrow  = 2,
+			fieldterminator = ',',
+			tablock
+		);
+		SET @END_TIME = GETDATE();
+		PRINT '>> LOAD DURATION : ' + CAST (DATEDIFF(SECOND, @START_TIME, @END_TIME) AS NVARCHAR) + 'SECONDS';
+
+	SET @START_TIME = GETDATE();
+	Print '----------------------------------------------------';
+	Print 'Loading GUARDIAN AM LIST';
+	Print '----------------------------------------------------';
+	Print '>> Truncating Table:bronze.guardian_AMlist'
+	truncate table bronze.guardian_AMlist;
+	Print '>> Inserting data into: Table:bronze.guardian_AMlist' ;
+	Bulk insert bronze.guardian_AMlist
+	from 'C:\Users\pchai\OneDrive - The Dairy Farm Company Ltd\Documents\SG Market\Datawarehouse Project\Guardian AM Store Assignment.csv'
+	with (
+		format = 'csv',
+		fieldquote = '"' , 
+		firstrow  = 2,
+		fieldterminator = ',',
+		tablock
+		);
+	SET @END_TIME = GETDATE();
+	PRINT '>>LOAD DURATION : ' + CAST (DATEDIFF(SECOND, @START_TIME, @END_TIME) AS NVARCHAR) + 'SECONDS';
+	SET @START_TIME = GETDATE();
+	Print '----------------------------------------------------';
+	Print 'Loading SG 7E FRANCHISE LIST';
+	Print '----------------------------------------------------';
+	Print '>> Truncating Table:bronze.fran_list2026' ;
+	truncate table bronze.fran_list2026;
+	Print '>> Inserting data into: Table:bronze.fran_list2026' ;
+	Bulk insert bronze.fran_list2026
+	from 'C:\Users\pchai\OneDrive - The Dairy Farm Company Ltd\Documents\SG Market\Datawarehouse Project\7E Franchise List(June2026).csv'
+	with (
+		format = 'csv',
+		fieldquote = '"' , 
+		firstrow  = 2,
+		fieldterminator = ',',
+		tablock
+	);
+	SET @END_TIME = GETDATE();
+	PRINT '>>LOAD DURATION : ' + CAST (DATEDIFF(SECOND, @START_TIME, @END_TIME) AS NVARCHAR) + 'SECONDS';
+SET @START_TIME = GETDATE();
+Print '----------------------------------------------------';
+	Print 'Loading SF EMPLOYEE DATA LIST';
+	Print '----------------------------------------------------';
+	Print '>> Truncating Table:bronze.SF_EMP_DATA' ;
+	truncate table bronze.SF_EMP_DATA;
+	Print '>> Inserting data into: Table:bronze.SF_EMP_DATA' ;
+	Bulk insert bronze.SF_EMP_DATA
+	from 'C:\Users\pchai\OneDrive - The Dairy Farm Company Ltd\Documents\SG Market\Datawarehouse Project\report_sg_emp_info_test (6).csv'
+	with (
+		format = 'csv',
+		fieldquote = '"' , 
+		firstrow  = 2,
+		fieldterminator = ',',
+		tablock
+	);
+SET @END_TIME = GETDATE();
+SET @BATCH_END_TIME = GETDATE()
+PRINT '>>LOAD DURATION : ' + CAST (DATEDIFF(SECOND, @START_TIME, @END_TIME) AS NVARCHAR) + 'SECONDS';
+SET @BATCH_END_TIME = GETDATE()
+PRINT ' ============================================'
+PRINT ' LOADING BRONZE LAYER COMPLETED'
+PRINT ' TOTAL DURATION : ' + CAST(DATEDIFF(SECOND,@BATCH_START_TIME, @BATCH_END_TIME) AS NVARCHAR) + 'SECONDS';
+PRINT ' ============================================'
+END TRY
+BEGIN CATCH
+PRINT '==============================================='
+PRINT 'ERROR OCCURED DURING BRONZE LAYER LOAD'
+PRINT 'ERROR' + ERROR_MESSAGE()
+PRINT 'ERROR NUMBER' + CAST(ERROR_NUMBER() AS NVARCHAR);
+PRINT 'ERROR NUMBER' + CAST(ERROR_STATE() AS NVARCHAR);
+PRINT '==============================================='
+END CATCH
+end ;
 
